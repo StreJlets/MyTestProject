@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -54,6 +55,16 @@ private slots:
 
     void on_pushButton_minus_clicked();
 
+
+    void on_pushButton_incr_clicked();
+
+    void on_pushButton_decr_clicked();
+
+    void on_pushButton_del_clicked();
+
+    void on_actionPress_0_triggered();
+protected:
+    void keyPressEvent (QKeyEvent *e) override;
 
 private:
     Ui::MainWindow *ui;

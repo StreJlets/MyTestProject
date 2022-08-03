@@ -67,6 +67,15 @@
         <height>50</height>
        </size>
       </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="tabChangesFocus">
+       <bool>true</bool>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
     <item>
@@ -655,7 +664,58 @@
     </rect>
    </property>
   </widget>
+  <action name="actionPress_0">
+   <property name="text">
+    <string>Press 0</string>
+   </property>
+   <property name="toolTip">
+    <string> </string>
+   </property>
+   <property name="shortcut">
+    <string>0, 0</string>
+   </property>
+  </action>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>pushButton_0</tabstop>
+  <tabstop>pushButton_1</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>pushButton_8</tabstop>
+  <tabstop>pushButton_9</tabstop>
+  <tabstop>pushButton_point</tabstop>
+  <tabstop>pushButton_plus</tabstop>
+  <tabstop>pushButton_minus</tabstop>
+  <tabstop>pushButton_incr</tabstop>
+  <tabstop>pushButton_rezult</tabstop>
+  <tabstop>pushButton_CE</tabstop>
+  <tabstop>pushButton_C</tabstop>
+  <tabstop>pushButton_del</tabstop>
+  <tabstop>pushButton_decr</tabstop>
+  <tabstop>textEdit</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionPress_0</sender>
+   <signal>hovered()</signal>
+   <receiver>pushButton_0</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>48</x>
+     <y>368</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
