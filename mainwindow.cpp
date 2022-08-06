@@ -6,6 +6,16 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->pushButton_0,SIGNAL(clicked()),this,SLOT(print_symbol()));
+    connect(ui->pushButton_1,SIGNAL(clicked()),this,SLOT(print_symbol()));
+    connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(print_symbol()));
+    connect(ui->pushButton_3,SIGNAL(clicked()),this,SLOT(print_symbol()));
+    connect(ui->pushButton_4,SIGNAL(clicked()),this,SLOT(print_symbol()));
+    connect(ui->pushButton_5,SIGNAL(clicked()),this,SLOT(print_symbol()));
+    connect(ui->pushButton_6,SIGNAL(clicked()),this,SLOT(print_symbol()));
+    connect(ui->pushButton_7,SIGNAL(clicked()),this,SLOT(print_symbol()));
+    connect(ui->pushButton_8,SIGNAL(clicked()),this,SLOT(print_symbol()));
+    connect(ui->pushButton_9,SIGNAL(clicked()),this,SLOT(print_symbol()));
 }
 
 MainWindow::~MainWindow()
@@ -21,89 +31,34 @@ MainWindow::~MainWindow()
     buttons->append(ui->pushButton_6);
     buttons->append(ui->pushButton_7);
     buttons->append(ui->pushButton_8);
-    buttons->append(ui->pushButton_9);
+    buttons->append(ui->pushButton_9);    
+
 }
-void MainWindow::print_symbol(int arg1)
+void MainWindow::print_symbol()
 {
-    QString text2;
+    QPushButton *button = (QPushButton *)sender();
+
     num_clicked=true;
     if (!rezult_clicked)
     {
-        argument[index]+=text2.setNum(arg1);
-        argument[2]+=text2.setNum(arg1);
+        argument[index]+=button->text();
+        argument[2]+=button->text();
     }
     else
     {
-        argument[index]=text2.setNum(arg1);
-        argument[2]=text2.setNum(arg1);
+        argument[index]=button->text();
+        argument[2]=button->text();
     }
     argument[3]=argument[2];
     arg[index]=argument[index].toDouble();
     refresh_lines();
 }
 
-void MainWindow::on_pushButton_0_clicked()
-{
-    print_symbol(0);
-}
-
-
-void MainWindow::on_pushButton_1_clicked()
-{
-    print_symbol(1);
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    print_symbol(2);
-}
-
-
-void MainWindow::on_pushButton_3_clicked()
-{
-    print_symbol(3);
-}
-
-
-void MainWindow::on_pushButton_4_clicked()
-{
-    print_symbol(4);
-}
-
-
-void MainWindow::on_pushButton_5_clicked()
-{
-    print_symbol(5);
-}
-
-
-void MainWindow::on_pushButton_6_clicked()
-{
-    print_symbol(6);
-}
-
-
-void MainWindow::on_pushButton_7_clicked()
-{
-    print_symbol(7);
-}
-
-
-void MainWindow::on_pushButton_8_clicked()
-{
-    print_symbol(8);
-}
-
-
-void MainWindow::on_pushButton_9_clicked()
-{
-    print_symbol(9);
-}
 
 void MainWindow::refresh_lines()
  {
      ui->lineEdit->setText(argument[index]);
-     ui->textEdit->setText(argument[2]);
+     ui->label->setText(argument[2]);
      rezult_clicked=false;
  }
 void MainWindow::on_pushButton_plus_clicked()
@@ -132,13 +87,14 @@ void MainWindow::on_pushButton_plus_clicked()
 
     oper=1;//+
     ui->lineEdit->setText(argument[0]);
-    ui->textEdit->setText(argument[2]);
+    ui->label->setText(argument[2]);
 }
 
 
 void MainWindow::on_pushButton_C_clicked()
 {
     num_clicked=false;
+    rezult_clicked=false;
     ui->lineEdit->clear();
     arg[0]=arg[1]=0;
     argument[0].clear();
@@ -147,7 +103,7 @@ void MainWindow::on_pushButton_C_clicked()
     argument[3].clear();
     oper=index=0;
     Rezult=0;
-    ui->textEdit->clear();
+    ui->label->clear();
 }
 
 
@@ -197,7 +153,7 @@ void MainWindow::on_pushButton_rezult_clicked()
         }
         num_clicked=false;
 
-        ui->textEdit->setText(argument[2]);
+        ui->label->setText(argument[2]);
         arg[1]=0;
         argument[1].clear();
         oper=0;
@@ -211,12 +167,18 @@ void MainWindow::on_pushButton_rezult_clicked()
 
 void MainWindow::on_pushButton_CE_clicked()
 {
-    num_clicked=false;
-    ui->lineEdit->clear();
-    arg[1]=0;
-    argument[1].clear();
-    argument[2]=argument[3];
-    ui->textEdit->setText(argument[2]);
+    arg[index]=arg[index]*(-1);
+    if (!index)
+    {
+        argument[0].setNum(arg[index]);
+        ui->lineEdit->setText(argument[0]);
+        ui->label->setText(argument[0]);
+    }
+    else
+    {
+
+    }
+
 }
 
 
@@ -248,7 +210,7 @@ void MainWindow::on_pushButton_minus_clicked()
     }
     oper=2;//-
     ui->lineEdit->setText(argument[0]);
-    ui->textEdit->setText(argument[2]);
+    ui->label->setText(argument[2]);
     argument[3]=argument[2];
      num_clicked=false;
 }
@@ -281,7 +243,7 @@ void MainWindow::on_pushButton_incr_clicked()
 
     oper=3;//+
     ui->lineEdit->setText(argument[0]);
-    ui->textEdit->setText(argument[2]);
+    ui->label->setText(argument[2]);
     argument[3]=argument[2];
     num_clicked=false;
 
@@ -301,7 +263,14 @@ void MainWindow::on_pushButton_decr_clicked()
         if (num_clicked)
         {
             arg[1]=argument[1].toDouble();
-            arg[0]=arg[0]/arg[1];
+            if (arg[1]!=0)
+            {
+                arg[0]=arg[0]/arg[1];
+            }
+            else
+            {
+                arg[0]=0;
+            }
             argument[0].setNum(arg[0]);
             argument[1].clear();
 //            arg[1]=1;
@@ -312,9 +281,9 @@ void MainWindow::on_pushButton_decr_clicked()
         }
     }
 
-    oper=3;//+
+    oper=4;//+
     ui->lineEdit->setText(argument[0]);
-    ui->textEdit->setText(argument[2]);
+    ui->label->setText(argument[2]);
     argument[3]=argument[2];
     num_clicked=false;
 
@@ -329,7 +298,7 @@ void MainWindow::on_pushButton_del_clicked()
         argument[0].resize(argument[0].size() - 1);
         argument[2].resize(argument[2].size() - 1);
         ui->lineEdit->setText(argument[0]);
-        ui->textEdit->setText(argument[2]);
+        ui->label->setText(argument[2]);
         arg[1]=argument[1].toDouble();
     }
 
@@ -347,52 +316,52 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
     {
     case Qt::Key_0:
     {
-        on_pushButton_0_clicked();
+        ui->pushButton_0->click();
         break;
     }
     case Qt::Key_1:
     {
-        on_pushButton_1_clicked();
+        ui->pushButton_1->click();
         break;
     }
     case Qt::Key_2:
     {
-        on_pushButton_2_clicked();
+        ui->pushButton_2->click();
         break;
     }
     case Qt::Key_3:
     {
-        on_pushButton_3_clicked();
+        ui->pushButton_3->click();
         break;
     }
     case Qt::Key_4:
     {
-        on_pushButton_4_clicked();
+        ui->pushButton_4->click();
         break;
     }
     case Qt::Key_5:
     {
-        on_pushButton_5_clicked();
+        ui->pushButton_5->click();
         break;
     }
     case Qt::Key_6:
     {
-        on_pushButton_6_clicked();
+        ui->pushButton_6->click();
         break;
     }
     case Qt::Key_7:
     {
-        on_pushButton_7_clicked();
+        ui->pushButton_7->click();
         break;
     }
     case Qt::Key_8:
     {
-        on_pushButton_8_clicked();
+        ui->pushButton_8->click();
         break;
     }
     case Qt::Key_9:
     {
-        on_pushButton_9_clicked();
+        ui->pushButton_9->click();
         break;
     }
     case Qt::Key_Backspace:
@@ -420,6 +389,43 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
         on_pushButton_rezult_clicked();
         break;
     }
+    case Qt::Key_Period:
+    {
+        on_pushButton_point_clicked();
+        break;
+    }
+    case Qt::Key_Asterisk:
+    {
+        on_pushButton_incr_clicked();
+        break;
+    }
+    case Qt::Key_Delete:
+    {
+        on_pushButton_C_clicked();
+        break;
+    }
+    }
+}
+
+
+void MainWindow::on_pushButton_point_clicked()
+{
+//    num_clicked=true;
+    if (!(ui->label->text().contains('.')))
+    {
+        if (!rezult_clicked && num_clicked)
+        {
+            argument[index]+=".";
+            argument[2]+=".";
+        }
+        else
+        {
+            argument[index]="0.";
+            argument[2]="0.";
+        }
+        argument[3]=argument[2];
+        arg[index]=argument[index].toDouble();
+        refresh_lines();
     }
 }
 
