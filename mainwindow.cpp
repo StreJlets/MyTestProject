@@ -57,7 +57,7 @@ void MainWindow::print_symbol()
 
 void MainWindow::refresh_lines()
  {
-     ui->lineEdit->setText(argument[index]);
+     ui->label_2->setText(argument[index]);
      ui->label->setText(argument[2]);
      rezult_clicked=false;
  }
@@ -86,7 +86,7 @@ void MainWindow::on_pushButton_plus_clicked()
     }
 
     oper=1;//+
-    ui->lineEdit->setText(argument[0]);
+    ui->label_2->setText(argument[0]);
     ui->label->setText(argument[2]);
 }
 
@@ -95,7 +95,7 @@ void MainWindow::on_pushButton_C_clicked()
 {
     num_clicked=false;
     rezult_clicked=false;
-    ui->lineEdit->clear();
+    ui->label_2->clear();
     arg[0]=arg[1]=0;
     argument[0].clear();
     argument[1].clear();
@@ -139,7 +139,7 @@ void MainWindow::on_pushButton_rezult_clicked()
                 break;
             }
         }
-        ui->lineEdit->setText(text1.setNum(Rezult));
+        ui->label_2->setText(text1.setNum(Rezult));
         argument[0].setNum(Rezult);
         arg[0]=Rezult;
         if (num_clicked)
@@ -171,7 +171,7 @@ void MainWindow::on_pushButton_CE_clicked()
     if (!index)
     {
         argument[0].setNum(arg[index]);
-        ui->lineEdit->setText(argument[0]);
+        ui->label_2->setText(argument[0]);
         ui->label->setText(argument[0]);
     }
     else
@@ -209,7 +209,7 @@ void MainWindow::on_pushButton_minus_clicked()
 
     }
     oper=2;//-
-    ui->lineEdit->setText(argument[0]);
+    ui->label_2->setText(argument[0]);
     ui->label->setText(argument[2]);
     argument[3]=argument[2];
      num_clicked=false;
@@ -242,7 +242,7 @@ void MainWindow::on_pushButton_incr_clicked()
     }
 
     oper=3;//+
-    ui->lineEdit->setText(argument[0]);
+    ui->label_2->setText(argument[0]);
     ui->label->setText(argument[2]);
     argument[3]=argument[2];
     num_clicked=false;
@@ -282,7 +282,7 @@ void MainWindow::on_pushButton_decr_clicked()
     }
 
     oper=4;//+
-    ui->lineEdit->setText(argument[0]);
+    ui->label_2->setText(argument[0]);
     ui->label->setText(argument[2]);
     argument[3]=argument[2];
     num_clicked=false;
@@ -297,7 +297,7 @@ void MainWindow::on_pushButton_del_clicked()
         argument[1].resize(argument[1].size() - 1);
         argument[0].resize(argument[0].size() - 1);
         argument[2].resize(argument[2].size() - 1);
-        ui->lineEdit->setText(argument[0]);
+        ui->label_2->setText(argument[0]);
         ui->label->setText(argument[2]);
         arg[1]=argument[1].toDouble();
     }
